@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio | Nhập môn Công nghệ số</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --beige-100: #FAF7F2;
+    --beige-200: #F2EDE3;
+    --beige-300: #E8DFD0;
+    --beige-400: #D4C5AD;
+    --beige-500: #BBA98E;
+    --beige-600: #9C8B72;
+    --brown-700: #6B5B45;
+    --brown-800: #4A3F30;
+    --brown-900: #2E2820;
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --white: #FDFBF8;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Segoe UI', Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--beige-100);
+    color: var(--brown-800);
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,247,242,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--beige-300);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 900;
+    color: var(--brown-800);
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 4px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-700);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--brown-900);
+    background: var(--beige-300);
+  }
+  .nav-dropdown {
+    position: relative;
+  }
+  .nav-dropdown-content {
+    display: none;
+    position: absolute; top: 100%; left: 0;
+    background: var(--white);
+    border: 1px solid var(--beige-300);
+    border-radius: 4px;
+    min-width: 200px;
+    box-shadow: 0 8px 32px rgba(46,40,32,0.08);
+    z-index: 200;
+    padding: 6px;
+  }
+  .nav-dropdown:hover .nav-dropdown-content { display: block; }
+  .nav-dropdown-content a {
+    display: block;
+    width: 100%;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 11px;
+    padding: 8px 14px;
+    border-radius: 2px;
+    color: var(--brown-700);
+  }
+  .nav-dropdown-content a:hover {
+    background: var(--beige-200);
+    color: var(--brown-900);
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ── HERO / INTRO PAGE — Picto style ── */
+  .hero {
+    padding-top: 64px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  /* LEFT — text side */
+  .hero-left {
+    background: var(--beige-100);
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; top: -120px; left: -120px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-greeting {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--beige-200);
+    border: 1px solid var(--beige-300);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brown-700);
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+  .hero-greeting span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: inline-block;
+  }
+  .hero-tag {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--brown-700);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(40px, 4.5vw, 62px);
+    font-weight: 400;
+    color: var(--brown-900);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero-name em {
+    font-style: normal;
+    color: var(--gold);
+    display: block;
+  }
+  .hero-subtitle {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    color: var(--brown-700);
+    margin-bottom: 36px;
+    font-weight: 390;
+    line-height: 1.6;
+  }
+  .hero-divider {
+    width: 48px; height: 2px;
+    background: var(--gold);
+    margin-bottom: 28px;
+    border-radius: 2px;
+  }
+  .hero-desc {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--brown-700);
+    font-weight: 390;
+    max-width: 400px;
+    margin-bottom: 44px;
+  }
+  .hero-cta-row {
+    display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--brown-900);
+    color: var(--beige-100);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 2px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--brown-800); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--brown-700);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 14px 0;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s, gap 0.2s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover { color: var(--gold); gap: 14px; }
+  .btn-arrow { font-size: 14px; }
+
+  /* stat badges row */
+  .hero-stats {
+    display: flex; gap: 24px;
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid var(--beige-300);
+    flex-wrap: wrap;
+  }
+  .hero-stat { display: flex; flex-direction: column; gap: 4px; }
+  .hero-stat-num {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--brown-900);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--beige-500);
+  }
+
+  /* RIGHT — photo side, same background */
+  .hero-right {
+    background: var(--beige-100);
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 30px 20px 80px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right::before, .hero-right::after { display: none; }
+
+  /* floating info card */
+  .hero-card {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    background: var(--white);
+    border: 1px solid var(--beige-300);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 18px 20px;
+    min-width: 180px;
+    box-shadow: 0 8px 32px rgba(46,40,32,0.10);
+    z-index: 10;
+  }
+  .hero-card-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .hero-card-value {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--brown-900);
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  /* availability badge */
+  .hero-badge {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--beige-200);
+    border: 1px solid var(--beige-300);
+    border-radius: 100px;
+    padding: 8px 18px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-700);
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #78c450;
+    box-shadow: 0 0 0 3px rgba(120,196,80,0.25);
+    flex-shrink: 0;
+    animation: pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(120,196,80,0.25); }
+    50% { box-shadow: 0 0 0 6px rgba(120,196,80,0.1); }
+  }
+
+  /* avatar — portrait photo */
+  .avatar-placeholder {
+    width: min(420px, 85%);
+    height: calc(100vh - 64px);
+    aspect-ratio: unset;
+    border-radius: 16px;
+    background: transparent;
+    border: 1px solid var(--beige-400);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 5;
+    
+  }
+  .avatar-placeholder img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .avatar-placeholder .avatar-initials {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--beige-500);
+    font-style: normal;
+  }
+  .avatar-update-note { display: none; }
+
+  .info-block { margin-bottom: 32px; }
+  .info-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .info-item {
+    font-size: 14px;
+    color: var(--brown-700);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--beige-300);
+    font-weight: 300;
+  }
+  .info-item:last-child { border-bottom: none; }
+
+  .section-tag {
+    font-size: 29px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 400;
+    color: var(--brown-900);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .section-title em { font-style: normal; color: var(--brown-700); font-weight: 400; }
+
+  /* ── ABOUT SECTION (below hero) ── */
+  .about-section {
+    padding: 100px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .about-section p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--brown-700);
+    margin-bottom: 20px;
+  }
+  .goals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .goal-card {
+    background: var(--white);
+    border: 1px solid var(--beige-300);
+    border-top: 3px solid var(--gold);
+    padding: 32px;
+    border-radius: 2px;
+  }
+  .goal-card h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--brown-900);
+    margin-bottom: 12px;
+  }
+  .goal-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--brown-700);
+    margin: 0;
+  }
+
+  .goal-card.goal-card-hobby { background: var(--white); }
+  .hobby-list {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .hobby-list li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; color: var(--brown-700);
+  }
+  .hobby-list li::before {
+    content: '';
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #E8954A;
+    flex-shrink: 0;
+  }
+  .footer-logo-img { display: flex; align-items: center; }
+
+  /* ── DỰ ÁN PAGE ── */
+  .projects-hero {
+    padding: 100px 80px 48px;
+    background: var(--beige-100);
+  }
+  .projects-hero h2 {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--brown-900);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .projects-hero p {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    color: var(--brown-700);
+    margin: 0;
+  }
+
+  .projects-grid {
+    padding: 32px 80px 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    background: var(--beige-100);
+  }
+  .project-card {
+    background: #fff;
+    border: 1px solid #e8e0d6;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.25s, transform 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover {
+    box-shadow: 0 6px 28px rgba(46,40,32,0.13);
+    transform: translateY(-4px);
+  }
+  .project-img-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #f0ebe4;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .project-img-placeholder img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .project-img-placeholder span {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #b0a090;
+    text-transform: uppercase;
+  }
+  .project-card-body {
+    padding: 20px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 6px;
+  }
+  .project-card h3 {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--brown-900);
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+  .project-card p {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    color: #6b5e52;
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+  .project-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #efe8df;
+    padding-top: 14px;
+    margin-top: 14px;
+  }
+  .status-text {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brown-900);
+  }
+  .card-link {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #C8823A;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+  }
+  .card-link:hover { color: var(--gold); }
+
+  /* ── BÀI DETAIL PAGES ── */
+  .detail-page { padding-top: 64px; }
+  .detail-hero {
+    background: var(--brown-800);
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .detail-hero-text .section-tag { color: var(--gold); }
+  .detail-hero-text .section-title { color: var(--beige-100); margin-bottom: 16px; font-size: 40px; font-weight: 600; }
+  .detail-hero-text p {
+    color: var(--beige-400);
+    font-size: 20px;
+    line-height: 1.8;
+    font-weight: 500;
+  }
+  .detail-hero-img {
+    display: none;
+  }
+  .detail-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+  .detail-hero-img span {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(201,169,110,0.4);
+    text-transform: uppercase;
+  }
+
+  .detail-body {
+    padding: 80px;
+    max-width: 860px;
+  }
+  .detail-section { margin-bottom: 60px; }
+  .detail-section h3 {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--brown-900);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--beige-300);
+  }
+  .detail-section p {
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--brown-700);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .detail-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .detail-section ul li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--brown-700);
+    padding: 8px 0 8px 20px;
+    border-bottom: 1px solid var(--beige-200);
+    position: relative;
+  }
+  .detail-section ul li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-size: 12px;
+  }
+
+  .file-placeholder {
+    background: var(--beige-200);
+    border: 2px dashed var(--beige-400);
+    border-radius: 4px;
+    padding: 40px;
+    text-align: center;
+    margin: 24px 0;
+  }
+  .file-placeholder .file-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    color: var(--beige-500);
+  }
+  .file-placeholder p {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--beige-500);
+    margin: 0;
+  }
+  .file-placeholder .file-note {
+    font-size: 11px;
+    color: var(--beige-400);
+    margin-top: 8px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .comparison-card {
+    background: var(--white);
+    border: 1px solid var(--beige-300);
+    padding: 28px;
+    border-radius: 2px;
+  }
+  .comparison-card h4 {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .comparison-card p {
+    font-size: 13px;
+    color: var(--brown-700);
+    line-height: 1.7;
+    margin: 0;
+    font-style: normal;
+    background: var(--beige-100);
+    padding: 16px;
+    border-left: 3px solid var(--gold-light);
+  }
+
+  .principle-list {
+    counter-reset: principle;
+  }
+  .principle-item {
+    counter-increment: principle;
+    display: flex; gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--beige-200);
+    align-items: flex-start;
+  }
+  .principle-item::before {
+    content: counter(principle, decimal-leading-zero);
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--gold);
+    font-style: normal;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+  .principle-item p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--brown-700);
+    margin: 0;
+  }
+  .principle-item strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--brown-900);
+    margin-bottom: 4px;
+  }
+
+  /* ── TỔNG KẾT PAGE ── */
+  .tongket-hero {
+    padding-top: 64px;
+    background: linear-gradient(135deg, var(--brown-900) 0%, var(--brown-800) 100%);
+    padding-bottom: 100px;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+  .tongket-hero .section-tag { color: var(--gold); padding-top: 60px; }
+  .tongket-hero .section-title { color: var(--beige-100); max-width: 600px; }
+  .tongket-hero > p {
+    color: var(--beige-400);
+    font-size: 15px;
+    max-width: 560px;
+    line-height: 1.8;
+    margin-top: 16px;
+  }
+
+  .tru-cot {
+    padding: 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--beige-300);
+  }
+  .tru-cot-item {
+    background: var(--white);
+    padding: 48px 40px;
+  }
+  .tru-cot-item .tc-num {
+    font-family: var(--serif);
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--beige-300);
+    font-style: normal;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .tru-cot-item h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--brown-900);
+    margin-bottom: 16px;
+  }
+  .tru-cot-item p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--brown-700);
+  }
+
+  .tam-dac-section {
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .tam-dac-card {
+    background: var(--white);
+    border: 1px solid var(--beige-300);
+    padding: 40px;
+    border-radius: 2px;
+  }
+  .tam-dac-card.highlight {
+    background: var(--brown-900);
+    border-color: transparent;
+  }
+  .tam-dac-card h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--brown-900);
+    margin-bottom: 16px;
+  }
+  .tam-dac-card.highlight h3 { color: var(--gold-light); }
+  .tam-dac-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--brown-700);
+  }
+  .tam-dac-card.highlight p { color: var(--beige-400); }
+
+  .kehoach-section {
+    padding: 0 80px 80px;
+  }
+  .kehoach-section h2 {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--brown-900);
+    margin-bottom: 40px;
+  }
+  .kehoach-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .kehoach-item {
+    background: var(--white);
+    border: 1px solid var(--beige-300);
+    border-top: 3px solid var(--gold);
+    padding: 32px;
+  }
+  .kehoach-item h4 {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .kehoach-item p {
+    font-size: 14px;
+    color: var(--brown-700);
+    line-height: 1.7;
+  }
+
+  .quote-section {
+    background: var(--brown-900);
+    padding: 80px;
+    text-align: center;
+  }
+  .quote-section blockquote {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 300;
+    font-style: normal;
+    color: var(--beige-200);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .quote-section cite {
+    display: block;
+    margin-top: 24px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown-900);
+    color: var(--beige-400);
+    padding: 8px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    border-top: 1px solid rgba(201,169,110,0.15);
+  }
+  footer .footer-logo { display: none; }
+  footer .footer-info {
+    font-size: 13px;
+    color: var(--beige-400);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  footer .footer-links {
+    display: flex; gap: 14px;
+    list-style: none;
+    align-items: center;
+  }
+  footer .footer-links a {
+    color: var(--beige-500);
+    text-decoration: none;
+    display: flex; align-items: center;
+    transition: color 0.2s;
+  }
+  footer .footer-links a:hover { color: var(--gold); }
+  footer .footer-links svg { width: 22px; height: 22px; }
+
+  /* ── BACK BTN ── */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    cursor: pointer;
+    padding: 20px 80px 40px;
+    background: transparent;
+    border: none;
+    
+    transition: gap 0.2s;
+  }
+  .back-btn:hover { gap: 12px; }
+
+  /* ── IMAGE PLACEHOLDER ── */
+  .image-placeholder {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  /* ── DEMO BOX ── */
+  .demo-box {
+    background: var(--white);
+    border: 1px solid var(--beige-300);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 16px;
+    box-shadow: 0 2px 8px rgba(46,40,32,0.04);
+    font-weight: 600;
+  }
+  .demo-box h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--brown-800);
+    margin-bottom: 12px;
+    font-family: var(--serif);
+  }
+  .demo-box p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--brown-700);
+    font-weight: 500;
+  }
+
+  /* ── STEP LIST ── */
+  .step-list {
+    display: grid;
+    gap: 28px;
+    margin-top: 24px;
+  }
+  .step-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--beige-300);
+  }
+  .step-item:last-child {
+    border-bottom: none;
+  }
+  .step-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--brown-900);
+    flex-shrink: 0;
+  }
+  .step-content h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--brown-800);
+    margin-bottom: 8px;
+    font-family: var(--serif);
+  }
+  .step-content p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--brown-700);
+    font-weight: 500;
+  }
+  .step-content code {
+    background: var(--beige-200);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--brown-900);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 32px; }
+    .hero-right { padding: 60px 32px 0; min-height: 420px; }
+    .hero-card { left: 16px; }
+    .hero-stats { gap: 20px; }
+    .about-section { padding: 60px 32px; }
+    .goals-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; padding: 24px 24px 48px; gap: 16px; }
+    .projects-hero { padding: 80px 24px 32px; }
+    .detail-hero { grid-template-columns: 1fr; padding: 40px 32px; gap: 32px; }
+    .detail-body { padding: 40px 32px; }
+    .tru-cot { grid-template-columns: 1fr; padding: 40px 32px; }
+    .tam-dac-section { grid-template-columns: 1fr; padding: 40px 32px; }
+    .kehoach-section { padding: 0 32px 60px; }
+    .kehoach-list { grid-template-columns: 1fr; }
+    .tongket-hero { padding: 60px 32px 60px; }
+    .quote-section { padding: 60px 32px; }
+    footer { padding: 12px 20px; }
+    .comparison-grid { grid-template-columns: 1fr; }
+    .back-btn { padding: 32px 32px 0; }
+  }
+  
+</style>
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav>
+  <a class="nav-logo" onclick="showPage('intro')">Portfolio <span>·</span> Cá nhân</a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('intro')" id="nav-intro">Giới thiệu</a></li>
+    <li><a onclick="showPage('duan')" id="nav-duan">Dự án</a></li>
+    <li class="nav-dropdown">
+      <a>Bài tập ▾</a>
+      <div class="nav-dropdown-content">
+        <a onclick="showPage('bai1')">Bài 1 — Tệp tin & Thư mục</a>
+        <a onclick="showPage('bai2')">Bài 2 — Tìm kiếm học thuật</a>
+        <a onclick="showPage('bai3')">Bài 3 — Viết Prompt hiệu quả</a>
+        <a onclick="showPage('bai4')">Bài 4 — Hợp tác trực tuyến</a>
+        <a onclick="showPage('bai5')">Bài 5 — Sáng tạo nội dung AI</a>
+        <a onclick="showPage('bai6')">Bài 6 — AI có trách nhiệm</a>
+      </div>
+    </li>
+    <li><a onclick="showPage('tongket')" id="nav-tongket">Tổng kết</a></li>
+  </ul>
+</nav>
+
+
+<!-- ══════════════ TRANG GIỚI THIỆU ══════════════ -->
+<div id="page-intro" class="page active">
+  <div class="hero">
+    <!-- LEFT: Text & Info -->
+    <div class="hero-left">
+
+      <div class="hero-tag">Digital Portfolio · 2026</div>
+      <h1 class="hero-name">Xin chào, em là <em>Quách Trung Hà.</em></h1>
+      <p class="hero-subtitle">Hiện em đang là sinh viên năm nhất, ngành Khoa học dữ liệu tại Trường Đại học Công nghệ – ĐHQGHN.</p>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">Mục tiêu của em là trở thành một Data Engineer có tư duy phân tích, có thể xây dựng và vận hành các hệ thống dữ liệu một cách hiệu quả và bền vững. Để làm được như vậy em sẽ luôn tìm kiếm những cơ hội để học hỏi và phát triển kỹ năng số, kỹ năng tư duy xử lý và tổ chức dữ liệu của mình. Em tin rằng, mỗi dự án nhỏ này đều là một bước tiến quan trọng trong hành trình phát triển bản thân em.</p>
+      <div class="hero-cta-row">
+        <a class="btn-primary" onclick="showPage('duan')">Xem dự án <span class="btn-arrow">→</span></a>
+        <a class="btn-secondary" onclick="showPage('tongket')">Tổng kết hành trình <span class="btn-arrow">→</span></a>
+      </div>
+    
+    </div>
+
+    <!-- RIGHT: Photo -->
+    <div class="hero-right">
+      <div class="avatar-placeholder">
+        <img src="quick.jpg" alt="Ảnh cá nhân">
+      </div>
+    </div>
+  </div><!-- /.hero -->
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ══════════════ TRANG DỰ ÁN ══════════════ -->
+<div id="page-duan" class="page">
+  <div class="projects-hero">
+    <h2>Danh sách bài tập</h2>
+    <p>Tra cứu tiến độ và chi tiết các dự án học tập của em.</p>
+  </div>
+
+  <div class="projects-grid">
+    <!-- Bài 1 -->
+    <div class="project-card" onclick="showPage('bai1')">
+      <div class="project-img-placeholder">
+        <!-- <img src="anh-bai1.jpg" alt="Bài 1"/> -->
+        <span>Thêm ảnh sau</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Bài 1</h3>
+        <p>Thao tác cơ bản với tệp tin và thư mục</p>
+        <div class="project-card-footer">
+          <span class="status-text">Trạng thái: Hoàn thành</span>
+          <span class="card-link">Chi Tiết</span>
+        </div>
+      </div>
+    </div>
+    <!-- Bài 2 -->
+    <div class="project-card" onclick="showPage('bai2')">
+      <div class="project-img-placeholder">
+        <span>Thêm ảnh sau</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Bài 2</h3>
+        <p>Tìm kiếm và đánh giá thông tin học thuật</p>
+        <div class="project-card-footer">
+          <span class="status-text">Trạng thái: Hoàn thành</span>
+          <span class="card-link">Chi Tiết</span>
+        </div>
+      </div>
+    </div>
+    <!-- Bài 3 -->
+    <div class="project-card" onclick="showPage('bai3')">
+      <div class="project-img-placeholder">
+        <span>Thêm ảnh sau</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Bài 3</h3>
+        <p>Viết Prompt hiệu quả cho các tác vụ học tập</p>
+        <div class="project-card-footer">
+          <span class="status-text">Trạng thái: Hoàn thành</span>
+          <span class="card-link">Chi Tiết</span>
+        </div>
+      </div>
+    </div>
+    <!-- Bài 4 -->
+    <div class="project-card" onclick="showPage('bai4')">
+      <div class="project-img-placeholder">
+        <span>Thêm ảnh sau</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Bài 4</h3>
+        <p>Hợp tác trực tuyến</p>
+        <div class="project-card-footer">
+          <span class="status-text">Trạng thái: Hoàn thành</span>
+          <span class="card-link">Chi Tiết</span>
+        </div>
+      </div>
+    </div>
+    <!-- Bài 5 -->
+    <div class="project-card" onclick="showPage('bai5')">
+      <div class="project-img-placeholder">
+        <span>Thêm ảnh sau</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Bài 5</h3>
+        <p>Sáng tạo nội dung với AI</p>
+        <div class="project-card-footer">
+          <span class="status-text">Trạng thái: Hoàn thành</span>
+          <span class="card-link">Chi Tiết</span>
+        </div>
+      </div>
+    </div>
+    <!-- Bài 6 -->
+    <div class="project-card" onclick="showPage('bai6')">
+      <div class="project-img-placeholder">
+        <span>Thêm ảnh sau</span>
+      </div>
+      <div class="project-card-body">
+        <h3>Bài 6</h3>
+        <p>AI có trách nhiệm</p>
+        <div class="project-card-footer">
+          <span class="status-text">Trạng thái: Hoàn thành</span>
+          <span class="card-link">Chi Tiết</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ══════════════ BÀI 1 ══════════════ -->
+<div id="page-bai1" class="page">
+  <div class="detail-page">
+    <button class="back-btn" onclick="showPage('duan')">← Quay lại</button>
+    <div class="detail-hero">
+      <div class="detail-hero-text">
+        <div class="section-tag">Bài 1</div>
+        <h2 class="section-title">Thao tác cơ bản với tệp tin và thư mục</h2>
+        <p>Nắm vững các kỹ năng quản lý tệp tin từ cơ bản nhất: tạo, sao chép, cắt dán, xóa, và khôi phục tệp. Đây là nền tảng của năng lực số hiện đại.</p>
+      </div>
+      <div class="detail-hero-img">
+        <span>Cập nhật ảnh chụp màn hình</span>
+      </div>
+    </div>
+
+    <div class="detail-body" style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>📁 Khởi tạo nền tảng & Phân cấp Thư mục</h3>
+        <p>Mục tiêu của khối này là xây dựng thư mục gốc và thiết lập một hệ thống phân cấp rõ ràng, giúp quản lý dữ liệu bài thực hành một cách chuyên nghiệp.</p>
+        
+        <div class="demo-box" style="text-align: center;">
+          <p style="font-weight: 500; margin-bottom: 12px;">Cấu trúc thư mục gốc:</p>
+          <div style="background: var(--beige-200); padding: 12px 16px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--brown-800); line-height: 1.8; display: inline-block;">
+            ThucHanh_QuachTrungHa/<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;└─ GhiChu.txt
+          </div>
+        </div>
+
+        <div class="image-placeholder">
+          <img src="hinh1-1.png" alt="Tạo thư mục" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          <p style="color: var(--beige-600); font-size: 12px; margin-top: 8px; text-align: center;">Hình 1.1: Tạo thư mục ThucHanh_QuachTrungHa</p>
+        </div>
+
+        <div class="image-placeholder">
+          <img src="hinh1-2.png" alt="Tạo tệp GhiChu.txt khởi tạo" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          <p style="color: var(--beige-600); font-size: 12px; margin-top: 8px; text-align: center;">Hình 1.2: Tạo tệp GhiChu.txt khởi tạo</p>
+        </div>
+      </div> <div class="detail-section" style="text-align: center;">
+        <h3>🏷️ Định danh & Tối ưu hóa Tệp tin</h3>
+        <p>Đặt tên tệp rõ ràng không chỉ giúp bạn quản lý cá nhân tốt hơn mà còn là tiêu chuẩn bắt buộc khi làm việc nhóm trong ngành CNTT.</p>
+        
+        <div class="demo-box" style="background: #FFF3E0; border-left: 4px solid var(--gold); text-align: left;">
+          <p style="font-weight: 500; color: var(--brown-900); margin-bottom: 8px;">💡 Quy tắc đặt tên (Naming Convention):</p>
+          <p style="color: var(--brown-800); font-size: 14px;">Hãy luôn sử dụng phong cách PascalCase hoặc CamelCase để các thành phần trong tên tệp được phân tách rõ ràng mà không cần khoảng trắng, ví dụ: <code>GhiChuQuanTrong.txt</code> thay vì những cái tên chung chung không rõ nghĩa.</p>
+        </div>
+
+        <div class="image-placeholder">
+          <img src="hinh2.png" alt="Đổi tên tệp GhiChu.txt → GhiChuQuanTrong.txt" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          <p style="color: var(--beige-600); font-size: 12px; margin-top: 8px; text-align: center;">Hình 2: Đổi tên tệp GhiChu.txt → GhiChuQuanTrong.txt</p>
+        </div>
+      </div> <div class="detail-section" style="text-align: center;">
+        <h3>📋 Điều phối dữ liệu: Copy vs Cut</h3>
+        <p>Hiểu rõ sự khác biệt giữa hai thao tác này là nền tảng cốt lõi để quản lý dữ liệu một cách khoa học.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px;">
+          <div class="demo-box">
+            <h4 style="color: #FF6B35; margin-bottom: 12px;">📌 Copy & Paste</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;">Sử dụng phím tắt Ctrl + C và Ctrl + V. Tệp tin sẽ tồn tại song song ở cả hai vị trí.</p>
+          </div>
+          <div class="demo-box" style="background: #E3F2FD;">
+            <h4 style="color: #1976D2; margin-bottom: 12px;">🔀 Cut & Paste</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;">Sử dụng phím tắt Ctrl + X và Ctrl + V. Dữ liệu sẽ được di chuyển sang vị trí mới.</p>
+          </div>
+        </div>
+
+        <div class="image-placeholder">
+          <img src="hinh3-1.png" alt="Thao tác Copy file" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          <p style="color: var(--beige-600); font-size: 12px; margin-top: 8px; text-align: center;">Hình 3.1: Thao tác Copy file</p>
+        </div>
+
+        <div class="image-placeholder">
+          <img src="hinh3-2.png" alt="Thao tác Cut file" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          <p style="color: var(--beige-600); font-size: 12px; margin-top: 8px; text-align: center;">Hình 3.2: Thao tác Cut file</p>
+        </div>
+      </div> <div class="detail-section" style="text-align: center;">
+        <h3>🛡️ Vòng đời dữ liệu & Bảo mật</h3>
+        <p>Quản lý vòng đời của tệp tin từ tạo, chỉnh sửa, đến xóa là kỹ năng cơ bản nhưng vô cùng quan trọng.</p>
+        
+        <div class="demo-box" style="background: #E8F5E9; border-left: 4px solid #4CAF50; text-align: left;">
+          <h4 style="color: #2E7D32; margin-bottom: 12px;">♻️ Xóa tạm thời & Khôi phục</h4>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Khi bạn nhấn phím xóa, tệp tin được chuyển vào <strong>Recycle Bin</strong>. Dữ liệu vẫn tồn tại và có thể khôi phục bằng lệnh <strong>Restore</strong>.</p>
+        </div>
+
+        <div class="image-placeholder">
+          <img src="hinh4-1.png" alt="Quản lý Recycle Bin" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          <p style="color: var(--beige-600); font-size: 12px; margin-top: 8px; text-align: center;">Hình 4.1: Quản lý Recycle Bin</p>
+        </div>
+
+        <div class="demo-box" style="background: #FFEBEE; border-left: 4px solid #F44336; text-align: left;">
+          <h4 style="color: #C62828; margin-bottom: 12px;">⚠️ Xóa vĩnh viễn (Shift + Delete)</h4>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Sử dụng tổ hợp phím <strong>Shift + Delete</strong> để xóa ngay lập tức. Đây là thao tác không thể hoàn tác.</p>
+        </div>
+
+        <div class="image-placeholder">
+          <img src="hinh4-2.png" alt="Cảnh báo xóa vĩnh viễn" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          <p style="color: var(--beige-600); font-size: 12px; margin-top: 8px; text-align: center;">Hình 4.2: Cảnh báo xóa vĩnh viễn</p>
+        </div>
+      </div> <div class="detail-section" style="text-align: center;">
+        <h3>📝 Ghi chú học tập</h3>
+        <p><strong>Quy tắc đặt tên:</strong> Tránh ký tự đặc biệt: <code>/ \ : * ? " &lt; &gt; |</code></p>
+        <p style="margin-top: 8px;"><strong>Cấu trúc thư mục:</strong> Tổ chức theo chủ đề → dễ tìm kiếm</p>
+        <p style="margin-top: 8px;"><strong>An toàn dữ liệu:</strong> Recycle Bin là mạng an toàn cuối cùng</p>
+      </div> <div class="detail-section" style="text-align: center; border: none; padding: 60px 0;">
+        <h3 style="border: none; padding: 0; margin-bottom: 24px;">File PDF</h3>
+        <a href="1.pdf" style="display: inline-block; background: #FF7A00; color: white; padding: 14px 48px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; transition: background 0.3s;">WATCH NOW</a>
+      </div> </div>
+  </div>
+
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ══════════════ BÀI 2 ══════════════ -->
+<div id="page-bai2" class="page">
+  <div class="detail-page">
+    <button class="back-btn" onclick="showPage('duan')">← Quay lại</button>
+    <div class="detail-hero">
+      <div class="detail-hero-text">
+        <div class="section-tag">Bài 2</div>
+        <h2 class="section-title">Tìm kiếm & Đánh giá thông tin học thuật</h2>
+        <p><strong>Chủ đề:</strong> Ứng dụng Trí tuệ Nhân tạo trong Giáo dục Đại học<br>
+        <strong>Người thực hiện:</strong> Quách Trung Hà | <strong>Lớp:</strong> K70A-DS2</p>
+      </div>
+      <div class="detail-hero-img">
+        <span>Cập nhật ảnh bìa Bài 2</span>
+      </div>
+    </div>
+
+    <div class="detail-body" style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
+
+      <!-- Phần I: Giới thiệu & Mục tiêu -->
+      <div class="detail-section">
+        <h3>I. Giới thiệu & Mục tiêu</h3>
+        <p>Trong bối cảnh kỷ nguyên số, Trí tuệ nhân tạo (Artificial Intelligence - AI) đang trở thành một trong những lĩnh vực có tác động sâu rộng nhất đến nhiều khía cạnh của đời sống xã hội, trong đó giáo dục là một trong những lĩnh vực chịu ảnh hưởng mạnh mẽ nhất. Đặc biệt từ năm 2022-2023, với sự xuất hiện của các công cụ AI tạo sinh (Generative AI) như ChatGPT, Gemini, và Claude, câu hỏi về vai trò của AI trong dạy và học đã thu hút sự quan tâm lớn từ cộng đồng nghiên cứu giáo dục toàn cầu.</p>
+        
+        <div class="demo-box" style="background: var(--beige-200); border-left: 4px solid var(--gold); text-align: left;">
+          <h4 style="color: var(--brown-900); margin-bottom: 12px; font-size: 16px;">Mục tiêu nhiệm vụ:</h4>
+          <ul style="padding-left: 20px; color: var(--brown-800); font-size: 14px; list-style-type: disc;">
+            <li style="margin-bottom: 8px;">Thực hiện tìm kiếm, tổng hợp và đánh giá hệ thống 10 tài liệu học thuật về chủ đề Trí tuệ nhân tạo trong giáo dục (AI in Education - AIED).</li>
+            <li style="margin-bottom: 8px;">Xác định các bài báo khoa học được đăng trên các tạp chí uy tín như Springer, Elsevier, MDPI, và PMC.</li>
+            <li>Phân tích đa chiều về lợi ích, thách thức và các hướng phát triển tương lai của AI trong bối cảnh giáo dục đại học.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phần II: Phạm vi & Chiến lược tìm kiếm -->
+      <div class="detail-section">
+        <h3>II. Phạm vi & Chiến lược tìm kiếm</h3>
+        <p>Quá trình tìm kiếm tài liệu được thực hiện có hệ thống từ nhiều loại nguồn khác nhau, đảm bảo tính đa dạng và tin cậy của thông tin.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px;">
+          <div class="demo-box" style="background: var(--beige-200);">
+            <h4 style="color: var(--brown-900); margin-bottom: 12px;">📊 Phạm vi thời gian & Nguồn học thuật</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;"><strong>Thời gian:</strong> 2016 - 2025 (Ưu tiên các nghiên cứu cập nhật nhất)</p>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;"><strong>Cơ sở dữ liệu:</strong> Google Scholar, ScienceDirect (Elsevier), Springer Nature Link, PubMed Central (PMC), MDPI, ERIC</p>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;"><strong>Tổ chức & NXB:</strong> Báo cáo của UNESCO, OECD, U.S. Department of Education; sách chuyên khảo từ Pearson</p>
+          </div>
+          <div class="demo-box" style="background: #E3F2FD;">
+            <h4 style="color: #1976D2; margin-bottom: 12px;">🔍 Chiến lược & Từ khóa tìm kiếm</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;"><strong>Từ khóa chính:</strong> "Artificial Intelligence in Education", "AI in Higher Education", "Generative AI learning", "ChatGPT education"</p>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;"><strong>Tiêu chí lựa chọn:</strong><br>
+            (1) Tạp chí khoa học có phản biện (peer-reviewed)<br>
+            (2) Liên quan trực tiếp đến ứng dụng AI trong môi trường giáo dục<br>
+            (3) Truy cập toàn văn (full-text)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phần III: Bảng tổng hợp nguồn thông tin -->
+      <div class="detail-section">
+        <h3>III. Bảng tổng hợp nguồn thông tin</h3>
+        <p>Tổng cộng có 10 tài liệu được lựa chọn, bao gồm 7 bài báo khoa học và 3 nguồn khác. Dưới đây là bảng tổng hợp và đánh giá độ tin cậy theo tác giả/cơ quan xuất bản, phương pháp, và tính cập nhật.</p>
+        
+        <div style="overflow-x: auto; margin-top: 24px; border: 1px solid var(--beige-300); border-radius: 8px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px; color: var(--brown-800); text-align: left;">
+            <thead>
+              <tr style="background: var(--brown-900); color: var(--white);">
+                <th style="padding: 14px 16px; border-bottom: 1px solid var(--beige-300);">STT</th>
+                <th style="padding: 14px 16px; border-bottom: 1px solid var(--beige-300);">Tên tài liệu & Tác giả</th>
+                <th style="padding: 14px 16px; border-bottom: 1px solid var(--beige-300);">Cơ quan XB</th>
+                <th style="padding: 14px 16px; border-bottom: 1px solid var(--beige-300);">Năm</th>
+                <th style="padding: 14px 16px; border-bottom: 1px solid var(--beige-300);">Độ tin cậy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: var(--white); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">1</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Chen et al. - AI in Education: A systematic literature review</td>
+                <td style="padding: 12px 16px;">ScienceDirect</td>
+                <td style="padding: 12px 16px;">2024</td>
+                <td style="padding: 12px 16px;"><span style="background: #FF7A00; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">RẤT CAO</span></td>
+              </tr>
+              <tr style="background: var(--beige-100); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">2</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Martinez-Maldonado et al. - Systematic Review of AI in Education</td>
+                <td style="padding: 12px 16px;">MDPI</td>
+                <td style="padding: 12px 16px;">2025</td>
+                <td style="padding: 12px 16px;"><span style="background: #FF7A00; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">RẤT CAO</span></td>
+              </tr>
+              <tr style="background: var(--white); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">3</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Ifenthaler et al. - AI in Education: Implications...</td>
+                <td style="padding: 12px 16px;">Springer</td>
+                <td style="padding: 12px 16px;">2024</td>
+                <td style="padding: 12px 16px;"><span style="background: #FF7A00; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">RẤT CAO</span></td>
+              </tr>
+              <tr style="background: var(--beige-100); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">4</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Treve, M. - Integrating AI in Education: Impacts...</td>
+                <td style="padding: 12px 16px;">Int. J. VETR</td>
+                <td style="padding: 12px 16px;">2024</td>
+                <td style="padding: 12px 16px;"><span style="background: var(--beige-600); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">CAO</span></td>
+              </tr>
+              <tr style="background: var(--white); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">5</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Al-Zahrani et al. - Perceived Impact of AI on Academic Learning</td>
+                <td style="padding: 12px 16px;">PubMed Central</td>
+                <td style="padding: 12px 16px;">2024</td>
+                <td style="padding: 12px 16px;"><span style="background: #FF7A00; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">RẤT CAO</span></td>
+              </tr>
+              <tr style="background: var(--beige-100); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">6</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Singh et al. - AI in Teaching and Learning of Science</td>
+                <td style="padding: 12px 16px;">Springer</td>
+                <td style="padding: 12px 16px;">2024</td>
+                <td style="padding: 12px 16px;"><span style="background: #FF7A00; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">RẤT CAO</span></td>
+              </tr>
+              <tr style="background: var(--white); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">7</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Bewersdorff et al. - Unveiling the shadows: Beyond the hype...</td>
+                <td style="padding: 12px 16px;">Heliyon, PMC</td>
+                <td style="padding: 12px 16px;">2024</td>
+                <td style="padding: 12px 16px;"><span style="background: #FF7A00; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">RẤT CAO</span></td>
+              </tr>
+              <tr style="background: var(--beige-100); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">8</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Ju, Q. - Negative Impact of Generative AI on Scientific Learning...</td>
+                <td style="padding: 12px 16px;">arXiv</td>
+                <td style="padding: 12px 16px;">2023</td>
+                <td style="padding: 12px 16px;"><span style="background: var(--beige-600); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">CAO</span></td>
+              </tr>
+              <tr style="background: var(--white); border-bottom: 1px solid var(--beige-200);">
+                <td style="padding: 12px 16px;">9</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">U.S. Dept. of Education - AI and the Future of Teaching...</td>
+                <td style="padding: 12px 16px;">ERIC</td>
+                <td style="padding: 12px 16px;">2023</td>
+                <td style="padding: 12px 16px;"><span style="background: #FF7A00; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">RẤT CAO</span></td>
+              </tr>
+              <tr style="background: var(--beige-100);">
+                <td style="padding: 12px 16px;">10</td>
+                <td style="padding: 12px 16px; font-weight: 500; color: #1976D2;">Luckin et al. - Intelligence Unleashed: An Argument...</td>
+                <td style="padding: 12px 16px;">Pearson</td>
+                <td style="padding: 12px 16px;">2016</td>
+                <td style="padding: 12px 16px;"><span style="background: var(--beige-600); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">CAO</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Phần IV: Phân tích & Thảo luận -->
+      <div class="detail-section">
+        <h3>IV. Phân tích & Thảo luận</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px;">
+          <div class="demo-box" style="background: #E8F5E9; border-left: 4px solid #4CAF50;">
+            <h4 style="color: #2E7D32; margin-bottom: 12px; font-size: 16px;">✨ Ưu điểm / Lợi ích</h4>
+            <ul style="padding-left: 20px; font-size: 13px; color: var(--brown-700); line-height: 1.6;">
+              <li style="margin-bottom: 8px;">AI có tiềm năng cách mạng hóa giáo dục thông qua mô hình "humans in the loop".</li>
+              <li style="margin-bottom: 8px;">Tăng cường mức độ gắn kết và hiệu suất học tập của sinh viên một cách đáng kể.</li>
+              <li style="margin-bottom: 8px;">Hỗ trợ đắc lực trong việc làm rõ và giải thích các khái niệm phức tạp.</li>
+              <li>Cá nhân hóa học tập, cung cấp phản hồi tức thì và giảm tải áp lực cho giảng viên.</li>
+            </ul>
+          </div>
+          <div class="demo-box" style="background: #FFEBEE; border-left: 4px solid #F44336;">
+            <h4 style="color: #C62828; margin-bottom: 12px; font-size: 16px;">⚠️ Nhược điểm / Thách thức</h4>
+            <ul style="padding-left: 20px; font-size: 13px; color: var(--brown-700); line-height: 1.6;">
+              <li style="margin-bottom: 8px;">Tác động tiêu cực khi sinh viên ưu tiên giải pháp nhanh thay vì hiểu sâu vấn đề.</li>
+              <li style="margin-bottom: 8px;">Nguy cơ phụ thuộc công nghệ làm suy giảm trầm trọng năng lực tư duy phản biện.</li>
+              <li style="margin-bottom: 8px;">Rủi ro về bảo mật dữ liệu và thiên kiến thuật toán ẩn trong hệ thống AI.</li>
+              <li>Khoảng cách và bất bình đẳng trong khả năng tiếp cận AI giữa các khu vực và quốc gia.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phần V: Kết luận -->
+      <div class="detail-section" style="text-align: center; border: none; padding: 60px 0;">
+        <h3 style="text-align: center; border: none; padding: 0; margin-bottom: 24px;">V. Nhận xét và Kết luận</h3>
+        
+        <div class="demo-box" style="text-align: left; background: var(--beige-100); border: 1px solid var(--beige-300); margin-bottom: 40px; padding: 32px;">
+          <p style="color: var(--brown-800); margin-bottom: 12px;">Nhiệm vụ này đã giúp hình thành năng lực cốt lõi trong việc truy vấn và phê phán thông tin học thuật. Trí tuệ nhân tạo trong giáo dục là lĩnh vực nghiên cứu đang phát triển nhanh chóng với nhiều hứa hẹn nhưng cũng không ít thách thức.</p>
+          <p style="color: var(--brown-800);">AI có thể nâng cao đáng kể chất lượng và hiệu quả giáo dục nếu được triển khai có chủ đích, có đạo đức và có sự đồng hành của giảng viên có năng lực. Việc ứng dụng AI đòi hỏi tư duy hệ thống để đánh giá độ tin cậy và nhận diện giới hạn - nền tảng quan trọng cho định hướng ngành Khoa học dữ liệu.</p>
+        </div>
+
+        <h3 style="border: none; padding: 0; margin-bottom: 16px; text-align: center;">File PDF</h3>
+        <a href="2.pdf" style="display: inline-block; background: #FF7A00; color: white; padding: 14px 48px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; transition: transform 0.3s, box-shadow 0.3s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);">WATCH NOW</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ══════════════ BÀI 3 ══════════════ -->
+<div id="page-bai3" class="page">
+  <div class="detail-page">
+    <button class="back-btn" onclick="showPage('duan')">← Quay lại</button>
+    <div class="detail-hero">
+      <div class="detail-hero-text">
+        <div class="section-tag">Bài 3</div>
+        <h2 class="section-title">Kỹ năng viết Prompt hiệu quả cho Mô hình Ngôn ngữ Lớn</h2>
+        <p>Nghiên cứu, thử nghiệm và phân tích chuyên sâu các cấp độ Prompt từ cơ bản đến nâng cao để tối ưu hóa quá trình học tập và làm việc cùng hệ thống AI.</p>
+      </div>
+      <div class="detail-hero-img">
+        <span>Cập nhật ảnh chụp màn hình bài 3</span>
+      </div>
+    </div>
+
+    <div class="detail-body" style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>📌 Tổng quan Tác vụ Học tập</h3>
+        <p>Lựa chọn ba tác vụ thiết yếu trong môi trường học thuật, mỗi tác vụ đối mặt với những thách thức cụ thể đòi hỏi kỹ năng giao tiếp chuẩn xác với AI.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; text-align: left;">
+          <div class="demo-box" style="grid-column: 1 / -1;">
+            <h4 style="color: #1976D2; margin-bottom: 8px;">📚 1. Tóm tắt tài liệu học thuật</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;"><strong>Thách thức:</strong> Cần xác định đúng loại tài liệu, chiều dài tóm tắt, mức độ chuyên ngành, và đối tượng tiếp nhận để tối ưu hóa 80% thời gian đọc hiểu.</p>
+          </div>
+          <div class="demo-box" style="background: #E0F2F1;">
+            <h4 style="color: #004D40; margin-bottom: 8px;">💡 2. Giải thích khái niệm phức tạp</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;"><strong>Thách thức:</strong> Kiểm soát độ sâu kiến thức, duy trì tính chính xác, thêm ví dụ minh họa trực quan, tránh việc giải thích quá hàn lâm (VD: Khái niệm Entropy thông tin).</p>
+          </div>
+          <div class="demo-box" style="background: #FFF3E0;">
+            <h4 style="color: #E65100; margin-bottom: 8px;">📝 3. Tạo bộ câu hỏi ôn tập</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;"><strong>Thách thức:</strong> Kiểm soát linh hoạt số lượng, độ khó, phân tầng câu hỏi theo thang Bloom (nhớ/hiểu/vận dụng) và đảm bảo có đáp án chi tiết đi kèm.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🔄 Quá trình Tiến hóa của Câu lệnh (Prompt)</h3>
+        <p>Phân tích sự khác biệt rõ rệt về chất lượng đầu ra thông qua 3 cấp độ Prompt được thử nghiệm trên cùng một tác vụ (Case Study: Tóm tắt bài báo nghiên cứu định lượng).</p>
+        
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #673AB7; text-align: left; margin-bottom: 24px;">
+          <h4 style="color: #673AB7; margin-bottom: 12px;">🔍 Case Study: "Tác động của mạng xã hội đến sức khỏe tâm thần"</h4>
+          
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #757575;">CẤP ĐỘ 1 - CƠ BẢN (Đơn giản, ngắn gọn):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Tóm tắt bài báo này cho tôi."</code>
+            <p style="font-size: 13px; color: #D32F2F; margin-top: 6px;">❌ <strong>Kết quả (3.5/10):</strong> Trả về một đoạn văn tự do ~150 từ, thiếu tổ chức, bỏ sót hoàn toàn phương pháp nghiên cứu và hạn chế.</p>
+          </div>
+          
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #1976D2;">CẤP ĐỘ 2 - CẢI TIẾN (Chi tiết, có cấu trúc):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Hãy tóm tắt bài báo nghiên cứu sau theo cấu trúc: 1. Mục tiêu 2. Phương pháp 3. Kết quả chính 4. Hạn chế 5. Ý nghĩa. Độ dài: 200-250 từ. Dùng ngôn ngữ học thuật dễ hiểu."</code>
+            <p style="font-size: 13px; color: #F57C00; margin-top: 6px;">⚠️ <strong>Kết quả (7.0/10):</strong> Cung cấp đủ 5 mục theo yêu cầu, có trích dẫn số liệu. Dùng được nhưng thiếu chiều sâu phê phán học thuật.</p>
+          </div>
+          
+          <div>
+            <strong style="font-size: 13px; color: #2E7D32;">CẤP ĐỘ 3 - NÂNG CAO (Role + CoT + Few-shot):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Bạn là trợ lý nghiên cứu học thuật... Nhiệm vụ: tạo bản tóm tắt phân tích... [Cung cấp ví dụ chuẩn mẫu]... Hãy tư duy từng bước: xác định loại nghiên cứu → đánh giá phương pháp → tổng hợp kết quả → nhận định độc lập."</code>
+            <p style="font-size: 13px; color: #388E3C; margin-top: 6px;">✅ <strong>Kết quả (9.5/10):</strong> Tự động đánh giá chất lượng nghiên cứu, chỉ ra bias tiềm ẩn, đưa ra khuyến nghị. Đầu ra đạt chuẩn chuyên nghiệp dùng ngay (chỉ cần chỉnh sửa 5%).</p>
+          </div>
+        </div>
+
+      
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🧠 Giải mã Kỹ thuật Prompt Nâng cao</h3>
+        <p>Phân tích các cơ chế tạo nên sự khác biệt vượt trội của một Prompt xuất sắc thông qua các thủ thuật điều khiển mô hình.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px;">
+          <div class="demo-box">
+            <h4 style="color: #FF6B35; margin-bottom: 12px;">🎭 Role Prompting</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;">Gán vai trò chuyên gia (VD: "Giáo sư 20 năm kinh nghiệm") giúp AI kích hoạt các khuôn mẫu ngôn ngữ và kiến thức chuyên môn, thay đổi góc nhìn khác biệt so với phản hồi thông thường.</p>
+          </div>
+          <div class="demo-box" style="background: #E3F2FD;">
+            <h4 style="color: #1976D2; margin-bottom: 12px;">🔗 Chain-of-Thought (CoT)</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;">Buộc AI phải trình bày quy trình "tư duy từng bước" trước khi đưa ra đáp án. Thao tác này giúp AI tự kiểm tra lý luận, giảm mạnh rủi ro lỗi logic trong phân tích học thuật.</p>
+          </div>
+          <div class="demo-box" style="background: #E8F5E9;">
+            <h4 style="color: #2E7D32; margin-bottom: 12px;">🎯 Few-shot Examples</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;">Cung cấp 1-2 ví dụ chuẩn làm khuôn mẫu. AI tự động học hỏi định dạng, mức độ chi tiết và phong cách hành văn từ ví dụ, ngăn chặn các hiểu lầm về yêu cầu.</p>
+          </div>
+          <div class="demo-box" style="background: #FFF3E0;">
+            <h4 style="color: #E65100; margin-bottom: 12px;">🏗️ Scaffolding & Context</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; text-align: left;">Xác định chính xác tệp khán giả (Audience) và chia nhỏ lệnh thành các "giàn giáo" tuần tự để AI không bỏ sót yêu cầu, tự động hiệu chỉnh độ phức tạp ngôn ngữ thích hợp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🏆 7 Nguyên tắc Vàng trong Prompt Engineering</h3>
+        <p>Phát hiện then chốt: Đầu tư thêm 2 phút viết Prompt nâng cao mang lại chất lượng tăng gấp 3-4 lần. Dưới đây là bộ quy tắc đúc kết từ thực nghiệm:</p>
+
+        <div class="demo-box" style="background: #FFFDE7; border-left: 4px solid #FBC02D; text-align: left; padding: 24px;">
+          <ol style="font-size: 14px; color: var(--brown-800); padding-left: 20px; line-height: 1.8; margin: 0;">
+            <li><strong>Xác định vai trò chuyên gia (Role):</strong> Định hình danh tính (VD: "Chuyên gia thiết kế đánh giá giáo dục").</li>
+            <li><strong>Chỉ định rõ đầu ra (Output):</strong> Yêu cầu chính xác format, số mục, độ dài.</li>
+            <li><strong>Xác định đối tượng (Audience):</strong> Nêu rõ ai sẽ tiếp nhận kết quả để tinh chỉnh độ hàn lâm.</li>
+            <li><strong>Cung cấp ví dụ mẫu (Few-shot):</strong> Đưa ra kỳ vọng thực tế thông qua minh họa chuẩn.</li>
+            <li><strong>Yêu cầu tư duy từng bước (CoT):</strong> Ép thuật toán suy luận trước khi chốt kết quả.</li>
+            <li><strong>Thêm ràng buộc chất lượng (Constraints):</strong> Thiết lập ranh giới (VD: "Không dùng ví dụ hiển nhiên").</li>
+            <li><strong>Lặp và tinh chỉnh (Iterative):</strong> Hiểu rằng Prompt là một quá trình tương tác, luôn bổ sung lệnh đính chính thay vì viết lại từ đầu.</li>
+          </ol>
+        </div>
+        
+        <div class="demo-box" style="background: #FAFAFA; border-top: 4px solid #607D8B; text-align: left; margin-top: 20px;">
+          <p style="font-weight: 600; color: var(--brown-900); margin-bottom: 8px;">💡 Công thức Template Cốt lõi:</p>
+          <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #D84315; background: #FFF; padding: 12px; border: 1px dashed #BCAAA4; border-radius: 4px;">
+            [Vai trò] + [Ngữ cảnh/Khán giả] + [Ví dụ mẫu] + [Yêu cầu từng bước] + [Định dạng đầu ra]
+          </p>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center; border: none; padding: 60px 0;">
+        <h3 style="border: none; padding: 0; margin-bottom: 24px;">File PDF</h3>
+        <a href="3.pdf" style="display: inline-block; background: #FF7A00; color: white; padding: 14px 48px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; transition: background 0.3s;">WATCH NOW</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ══════════════ BÀI 4 ══════════════ -->
+<div id="page-bai4" class="page">
+  <div class="detail-page">
+    <button class="back-btn" onclick="showPage('duan')">← Quay lại</button>
+    <div class="detail-hero">
+      <div class="detail-hero-text">
+        <div class="section-tag">Bài 4</div>
+        <h2 class="section-title">Kỹ Năng Hợp Tác Trực Tuyến Và Quản Lý Dự Án</h2>
+        <p>Tổng kết quá trình ứng dụng thực tiễn hệ sinh thái công cụ cộng tác trực tuyến nhằm tối ưu hóa quy trình làm việc nhóm, lưu trữ dữ liệu và phát triển dự án cá nhân định hướng Data Engineering.</p>
+      </div>
+      <div class="detail-hero-img">
+        <span>Cập nhật ảnh chụp màn hình bài 4</span>
+      </div>
+    </div>
+
+    <div class="detail-body" style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🎯 Mục Tiêu & Bối Cảnh Triển Khai</h3>
+        <p>Dự án được thực hiện trong bối cảnh thực tế đòi hỏi sự linh hoạt và khả năng điều phối song song nhiều luồng công việc phức tạp.</p>
+        
+        <div class="demo-box" style="background: #E8F5E9; border-left: 4px solid #2E7D32; text-align: left; margin-top: 20px;">
+          <h4 style="color: #1B5E20; margin-bottom: 8px;">🚀 Bối cảnh thực tế:</h4>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; margin: 0;">Điều phối đồng thời 2 dự án trọng điểm: (1) Xây dựng nền tảng website thương mại cho tiệm bánh gia đình và (2) Phát triển hệ thống <strong>AI Emergency Agent</strong> tham gia đấu trường Hackathon chuyên nghiệp[cite: 492].</p>
+        </div>
+        
+        <div class="demo-box" style="background: #F3E5F5; border-left: 4px solid #8E24AA; text-align: left; margin-top: 16px;">
+          <h4 style="color: #4A148C; margin-bottom: 8px;">⚙️ Định hướng cá nhân:</h4>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; margin: 0;">Với mục tiêu phát triển theo con đường Data Engineer, trọng tâm được đặt vào việc tối ưu hóa đường ống xử lý thông tin (Data Pipeline), tổ chức lưu trữ khoa học và đảm bảo luồng giao tiếp thời gian thực không bị đứt gãy[cite: 491].</p>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🛠️ Hệ Thống Công Cụ Cộng Tác</h3>
+        <p>Thiết lập bộ công cụ quản trị dựa trên 3 nhóm chức năng cốt lõi nhằm đảm bảo tính đồng bộ và hiệu suất[cite: 493].</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px; text-align: left;">
+          <div class="demo-box" style="background: #E3F2FD;">
+            <h4 style="color: #1565C0; font-size: 14px; text-align: center; margin-bottom: 12px;">Quản lý dự án</h4>
+            <div style="text-align: center; margin-bottom: 12px;"><strong style="color: #0D47A1; font-size: 12px; background: #BBDEFB; padding: 4px 8px; border-radius: 4px;">Trello / GitHub</strong></div>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5;"><strong>Ứng dụng:</strong> Lập sơ đồ Kanban, chia nhỏ task lập trình Python & DB[cite: 494].</p>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5; margin-top: 8px;"><strong>Hiệu quả:</strong> Kiểm soát chặt chẽ tiến độ, ngăn chặn triệt để tình trạng chồng chéo nhiệm vụ[cite: 494].</p>
+          </div>
+          
+          <div class="demo-box" style="background: #FFF3E0;">
+            <h4 style="color: #E65100; font-size: 14px; text-align: center; margin-bottom: 12px;">Soạn thảo & Lưu trữ</h4>
+            <div style="text-align: center; margin-bottom: 12px;"><strong style="color: #BF360C; font-size: 12px; background: #FFE0B2; padding: 4px 8px; border-radius: 4px;">Google Workspace</strong></div>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5;"><strong>Ứng dụng:</strong> Soạn script presentation (Docs) và lưu trữ Dataset tập trung (Drive)[cite: 494].</p>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5; margin-top: 8px;"><strong>Hiệu quả:</strong> Chỉnh sửa đồng thời realtime, tra cứu tài liệu nhanh chóng, mọi lúc mọi nơi[cite: 494].</p>
+          </div>
+          
+          <div class="demo-box" style="background: #F3E5F5;">
+            <h4 style="color: #8E24AA; font-size: 14px; text-align: center; margin-bottom: 12px;">Giao tiếp nội bộ</h4>
+            <div style="text-align: center; margin-bottom: 12px;"><strong style="color: #4A148C; font-size: 12px; background: #E1BEE7; padding: 4px 8px; border-radius: 4px;">Discord / Slack</strong></div>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5;"><strong>Ứng dụng:</strong> Phân luồng channel chuyên biệt (Technical, Design, General)[cite: 494].</p>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5; margin-top: 8px;"><strong>Hiệu quả:</strong> Giảm thiểu họp hành không cần thiết, xử lý nóng sự cố kỹ thuật ngay lập tức[cite: 494].</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>📖 Nhật Ký Thực Hiện & Minh Chứng</h3>
+        <p>Minh họa cụ thể các thao tác thực hành quản trị trên nền tảng số.</p>
+        
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #1976D2; text-align: left; margin-bottom: 24px;">
+          <h4 style="color: #1976D2; margin-bottom: 8px;">1. Quản lý danh sách nhiệm vụ (Trello)</h4>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Ứng dụng bảng Kanban để theo dõi tiến trình dự án AI Emergency Agent. Các thẻ công việc (Cards) được thiết lập vòng đời rõ ràng: từ thiết kế Logic Flow sơ khởi đến giai đoạn triển khai Code thực tế trên môi trường VS Code.</p>
+          <div class="image-placeholder" style="margin-top: 16px;">
+            <img src="trello.jpg" alt="Cảnh báo xóa vĩnh viễn" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          </div>
+        </div>
+
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #FF9800; text-align: left; margin-bottom: 24px;">
+          <h4 style="color: #F57C00; margin-bottom: 8px;">2. Tương tác & Đóng góp nội dung (Zalo)</h4>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Trực tiếp tham gia biên tập tài liệu mô tả thuật toán lõi. Tận dụng triệt để tính năng <em>"Version History"</em> để truy xuất, đối chiếu và kiểm soát an toàn mọi thay đổi quan trọng từ các thành viên trong nhóm.</p>
+          <div class="image-placeholder" style="margin-top: 16px;">
+            <img src="minhchung.jpg" alt="Cảnh báo xóa vĩnh viễn" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+
+          </div>
+        </div>
+
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #4CAF50; text-align: left;">
+          <h4 style="color: #388E3C; margin-bottom: 8px;">3. Tổ chức lưu trữ dữ liệu khoa học (Google Drive)</h4>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Kiến trúc cây thư mục logic, phân tách rõ ràng tài nguyên: Tập tin CSV phục vụ Training Model tách biệt hoàn toàn với mã nguồn HTML/CSS giao diện tiệm bánh. Cấu trúc này tối ưu hóa tốc độ truy xuất tài nguyên cho toàn đội.</p>
+          <div class="image-placeholder" style="margin-top: 16px;">
+            <img src="drivemc.png" alt="Cảnh báo xóa vĩnh viễn" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>📊 Phân Tích Hiệu Quả & Bài Học Kinh Nghiệm</h3>
+        <p>Đánh giá tổng quan về sự thay đổi năng suất và tư duy khi chuyển đổi số quy trình làm việc.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px;">
+          <div class="demo-box" style="background: #E8F5E9; border-top: 4px solid #4CAF50; text-align: left;">
+            <h4 style="color: #2E7D32; margin-bottom: 12px;">📈 Bước nhảy vọt hiệu suất</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Tiết kiệm <strong>40% quỹ thời gian</strong> so với quy trình vận hành truyền thống[cite: 540]. Điểm sáng lớn nhất là sự kết nối liền mạch giữa IDE (VS Code) và GitHub, đảm bảo an toàn tuyệt đối cho quản trị mã nguồn (Source Control)[cite: 541].</p>
+          </div>
+          
+          <div class="demo-box" style="background: #FFEBEE; border-top: 4px solid #F44336; text-align: left;">
+            <h4 style="color: #C62828; margin-bottom: 12px;">⚡ Thách thức & Giải pháp</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;"><strong>Nỗi đau:</strong> Phân tán sự tập trung do bão thông báo (Notifications) từ đa nền tảng [cite: 542].<br><strong>Hành động:</strong> Áp dụng kỷ luật <em>"Deep Work"</em> với khung giờ đóng và thiết lập ma trận ưu tiên thông báo (Priority Notifications) trên các kênh chat[cite: 543].</p>
+          </div>
+        </div>
+
+        <div class="demo-box" style="background: #FFFDE7; border-left: 4px solid #FBC02D; text-align: center; margin-top: 24px;">
+          <h4 style="color: #F57F17; margin-bottom: 8px;">💡 Kết luận cốt lõi</h4>
+          <p style="font-size: 13px; color: var(--brown-800); line-height: 1.6; margin: 0; font-style: italic;">"Kỹ năng làm chủ công cụ số đã vượt qua ranh giới của một phương tiện hỗ trợ đơn thuần; nó chính thức trở thành <strong>tư duy quản trị bắt buộc</strong> – một năng lực sinh tồn đối với một Kỹ sư Dữ liệu (Data Engineer) trong bối cảnh công nghệ tương lai." [cite: 544]</p>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center; border: none; padding: 60px 0;">
+        <h3 style="border: none; padding: 0; margin-bottom: 24px;">File PDF</h3>
+        <a href="4.pdf" style="display: inline-block; background: #FF7A00; color: white; padding: 14px 48px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; transition: background 0.3s;">WATCH NOW</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ══════════════ BÀI 5 ═════════════ -->
+<div id="page-bai5" class="page">
+  <div class="detail-page">
+    <button class="back-btn" onclick="showPage('duan')">← Quay lại</button>
+    <div class="detail-hero">
+      <div class="detail-hero-text">
+        <div class="section-tag">Bài 5</div>
+        <h2 class="section-title">Sử dụng công cụ AI tạo sinh hỗ trợ sáng tạo nội dung số</h2>
+        <p>Xây dựng bài thuyết trình học thuật "Trí tuệ nhân tạo và tương lai của giáo dục" thông qua việc phối hợp và làm chủ tối ưu tổ hợp 4 công cụ AI tạo sinh: Claude, ChatGPT, DALL-E 3 và Canva AI.</p>
+      </div>
+      <div class="detail-hero-img">
+        <span>Cập nhật ảnh chụp màn hình bài 5</span>
+      </div>
+    </div>
+
+    <div class="detail-body" style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🚀 Tổng quan Dự án & Hệ sinh thái Công cụ AI</h3>
+        <p>Mục tiêu của khối này là xác định cấu trúc dự án sáng tạo slide deck 10 trang phục vụ seminar học thuật, kết hợp linh hoạt văn bản, hình ảnh gốc và bố cục infographic chuyên nghiệp.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; text-align: left;">
+          <div class="demo-box">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">✍️ Claude (Anthropic)</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Chuyên trách xử lý văn bản học thuật độ chính xác cao, lập luận logic, xây dựng dàn ý cấu trúc và nội dung chi tiết.</p>
+          </div>
+          <div class="demo-box" style="background: #E0F2F1;">
+            <h4 style="color: #004D40; margin-bottom: 8px;">💡 ChatGPT (OpenAI)</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Khai thác ý tưởng đa chiều (Brainstorming), thu thập số liệu thống kê quốc tế và thiết lập bộ câu hỏi thảo luận mở.</p>
+          </div>
+          <div class="demo-box" style="background: #FFF3E0;">
+            <h4 style="color: #E65100; margin-bottom: 8px;">🎨 DALL-E 3 (OpenAI)</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Minh họa trực quan hóa ý tưởng thành tài nguyên hình ảnh gốc chất lượng cao theo tỷ lệ chuẩn 16:9, tránh bản quyền.</p>
+          </div>
+          <div class="demo-box" style="background: #F3E5F5;">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">✨ Canva AI (Magic Tool)</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Hỗ trợ thiết kế tổng thể, kiến tạo layout tự động qua Magic Design và tối ưu hóa hệ thống tiêu đề bằng Magic Write.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>📝 Kỹ thuật Kỹ sư Prompt & Nhật ký Thực thi</h3>
+        <p>Ghi lại chi tiết chuỗi câu lệnh (Prompts) điều khiển và kết quả phản hồi thực tế từ các hệ thống trí tuệ nhân tạo.</p>
+        
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #673AB7; text-align: left; margin-bottom: 24px;">
+          <h4 style="color: #673AB7; margin-bottom: 12px;">🤖 3.1. Claude AI — Kiến tạo nội dung vĩ mô</h4>
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 1 (Tạo dàn ý):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Hãy tạo dàn ý chi tiết cho bài thuyết trình 10 slide về chủ đề 'Trí tuệ nhân tạo và tương lai của giáo dục'. Mỗi slide cần có tiêu đề, 3-4 ý chính và gợi ý hình ảnh minh họa phù hợp."</code>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <strong style="font-size: 13px; color: #2E7D32;">✅ Kết quả:</strong> Trả về cấu trúc 10 slide mạch lạc từ Giới thiệu, Hiện trạng, Lợi ích, Thách thức đến Xu hướng tương lai kèm bullet points cụ thể.
+          </div>
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 2 (Viết nội dung chi tiết):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Dựa trên dàn ý trên, viết nội dung chi tiết cho slide 4 về 'Lợi ích của AI trong giáo dục cá nhân hóa'. Hãy sử dụng ngôn ngữ học thuật, súc tích, phù hợp với khán giả là sinh viên đại học và giảng viên."</code>
+          </div>
+          <div>
+            <strong style="font-size: 13px; color: #2E7D32;">✅ Kết quả:</strong> Cung cấp 4 khối nội dung súc tích (50-70 từ/đoạn) về học tập thích ứng, phản hồi tức thời và lộ trình cá nhân hóa. Đạt chuẩn học thuật, tinh chỉnh thủ công khoảng 20%.
+          </div>
+        </div>
+
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #009688; text-align: left; margin-bottom: 24px;">
+          <h4 style="color: #009688; margin-bottom: 12px;">💡 3.2. ChatGPT — Brainstorming & Thu thập dữ liệu</h4>
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 3 (Tìm số liệu):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Cung cấp 5 số liệu thống kê cụ thể và có nguồn gốc rõ ràng về mức độ ứng dụng AI trong giáo dục toàn cầu năm 2023-2024, kèm tên tổ chức nghiên cứu hoặc báo cáo."</code>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <strong style="font-size: 13px; color: #2E7D32;">✅ Kết quả:</strong> Cung cấp dữ liệu từ McKinsey, UNESCO, WEF. Phát hiện có hiện tượng ảo tưởng (hallucination), tiến hành kiểm chứng độc lập và giữ lại 3/5 số liệu chính xác.
+          </div>
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 4 (Tạo câu hỏi):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Tạo 5 câu hỏi thảo luận mở, kích thích tư duy phản biện cho khán giả sau khi xem bài thuyết trình về AI trong giáo dục."</code>
+          </div>
+          <div>
+            <strong style="font-size: 13px; color: #2E7D32;">✅ Kết quả:</strong> Nhận 5 câu hỏi xuất sắc về đạo đức, bảo mật dữ liệu và khoảng cách số. Sử dụng trực tiếp 4/5 câu hỏi sau khi trau chuốt từ ngữ.
+          </div>
+        </div>
+
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #FF5722; text-align: left; margin-bottom: 24px;">
+          <h4 style="color: #FF5722; margin-bottom: 12px;">🎨 3.3. DALL-E 3 — Trực quan hóa ý tưởng nghệ thuật</h4>
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 5 (Slide mở đầu):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Create a photorealistic digital illustration showing a futuristic classroom where students use holographic AI interfaces to learn. Include diverse students aged 18-22, warm natural lighting, modern architecture. Style: professional, optimistic, suitable for academic presentation. 16:9 ratio."</code>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <strong style="font-size: 13px; color: #2E7D32;">✅ Kết quả:</strong> Xuất hình ảnh lớp học tương lai với hiệu ứng holographic sắc nét, tối ưu làm ảnh nền slide 1 không cần chỉnh sửa.
+          </div>
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 6 (Infographic lợi ích):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Create a clean, minimalist infographic showing 4 benefits of AI in personalized education: adaptive learning, real-time feedback, data analytics, individual pathways. Use icons and blue-green color scheme. White background, professional style."</code>
+          </div>
+          <div>
+            <strong style="font-size: 13px; color: #2E7D32;">✅ Kết quả:</strong> Bố cục 4 ô cân đối, hài hòa màu sắc nhưng phần chữ (text overlay) bị lỗi font hệ thống. Khắc phục bằng cách import hình ảnh vào Canva để tái cấu trúc văn bản.
+          </div>
+        </div>
+
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #E91E63; text-align: left;">
+          <h4 style="color: #E91E63; margin-bottom: 12px;">✨ 3.4. Canva AI — Tích hợp & Đóng gói thiết kế</h4>
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 7 (Magic Design):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Generate a professional presentation template for academic topic 'AI in Education'. Color scheme: navy blue and white with accent colors. Modern, clean design suitable for university seminar."</code>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <strong style="font-size: 13px; color: #2E7D32;">✅ Kết quả:</strong> Nhận diện 5 bộ layouts mẫu, lựa chọn thiết kế 2 cột phối màu xanh Navy chuyên nghiệp, tiết kiệm 2-3 giờ thiết kế cấu trúc tĩnh.
+          </div>
+          <div style="margin-bottom: 12px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 8 (Magic Write):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Improve these slide titles to be more engaging and action-oriented: 1. AI và Giáo dục, 2. Lợi ích, 3. Thách thức, 4. Tương lai. Keep them concise (max 8 words each)."</code>
+          </div>
+          <div>
+            <strong style="font-size: 13px; color: #2E7D32;">✅ Kết quả:</strong> Cải tiến thành công các tiêu đề hấp dẫn và hướng hành động như: "AI Đang Định Hình Lại Lớp Học Như Thế Nào", ứng dụng trực tiếp 3/4 gợi ý.
+          </div>
+        </div>
+
+        <div class="image-placeholder">
+          <img src="ketqua.png" alt="Quy trình ứng dụng công cụ AI tạo sinh" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--beige-300);">
+          <p style="color: var(--beige-600); font-size: 12px; margin-top: 8px; text-align: center;">Hình 5.1: Minh họa hành trình tối ưu hóa các dòng lệnh AI hỗ trợ sáng tạo nội dung</p>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>📊 Giao thoa Sáng tạo: Đồng đóng góp Con người & AI</h3>
+        <p>Sự kết hợp hài hòa khi AI đóng vai trò trợ lý tăng năng suất vật lý (&lt; 50%) và con người nắm giữ quyền kiểm soát tư duy, định hướng học thuật (&gt; 50%).</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px;">
+          <div class="demo-box" style="background: #ECEFF1; border-top: 4px solid #607D8B; text-align: left;">
+            <h4 style="color: #455A64; margin-bottom: 12px;">🤖 Đóng góp từ AI (&lt; 50%)</h4>
+            <ul style="font-size: 13px; color: var(--brown-700); padding-left: 20px; line-height: 1.8;">
+              <li><strong>Văn bản thô:</strong> ~40% dữ liệu phác thảo nền tảng ban đầu.</li>
+              <li><strong>Hình ảnh:</strong> Cung cấp 6/10 tài nguyên đồ họa nền từ DALL-E 3.</li>
+              <li><strong>Layout:</strong> Khung lưới bố cục cơ bản của hệ thống Slide mẫu.</li>
+            </ul>
+          </div>
+          <div class="demo-box" style="background: #E8F5E9; border-top: 4px solid #4CAF50; text-align: left;">
+            <h4 style="color: #2E7D32; margin-bottom: 12px;">🧑‍💻 Đóng góp Cá nhân (&gt; 50%)</h4>
+            <ul style="font-size: 13px; color: var(--brown-700); padding-left: 20px; line-height: 1.8;">
+              <li><strong>Tư duy cốt lõi:</strong> Toàn bộ luận điểm phân tích, kết luận sâu sắc.</li>
+              <li><strong>Xác thực thông tin:</strong> Fact-check số liệu, bổ sung 3 nghiên cứu độc lập.</li>
+              <li><strong>Nghệ thuật kể chuyện:</strong> Xây dựng tuyến tính mạch truyện logic xuyên suốt.</li>
+              <li><strong>Thiết kế thủ công:</strong> Tinh chỉnh Typography, Spacing và Color Palette.</li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>⚖️ Đánh giá Đối chiếu Hiệu năng Công nghệ</h3>
+        <p>Phân tích sâu sắc ưu và khuyết điểm của từng nền tảng công nghệ trong việc chuyển hóa quy trình làm việc từ tuyến tính truyền thống sang vòng lặp phi tuyến tính.</p>
+        
+        <div class="demo-box" style="background: #FFFDE7; border-left: 4px solid #FBC02D; text-align: left; margin-bottom: 16px;">
+          <p style="font-weight: 600; color: var(--brown-900); margin-bottom: 4px;">🧠 Claude vs ChatGPT (Văn bản học thuật):</p>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Claude vượt trội về tư duy logic chặt chẽ, kiểm soát hallucination tốt và bám sát ngữ cảnh học thuật. ChatGPT phát huy thế mạnh vượt bậc trong giai đoạn kích hoạt ý tưởng sáng tạo và tạo các biến thể câu hỏi đa chiều.</p>
+        </div>
+
+        <div class="demo-box" style="background: #F3E5F5; border-left: 4px solid #8E24AA; text-align: left; margin-bottom: 16px;">
+          <p style="font-weight: 600; color: var(--brown-900); margin-bottom: 4px;">🖼️ DALL-E 3 & Canva AI (Visual & Thiết kế tổng thể):</p>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">DALL-E bám sát mô tả văn bản xuất sắc nhưng xử lý chữ đồ họa lỗi font chữ nghiêm trọng. Canva AI có tính thực dụng cao, tạo layout nhanh, tuy nhiên Magic Write tiếng Việt chưa tự nhiên, vẫn phụ thuộc tinh chỉnh thủ công.</p>
+        </div>
+
+        <div class="demo-box" style="background: #E3F2FD; border-left: 4px solid #1976D2; text-align: left;">
+          <p style="font-weight: 600; color: var(--brown-900); margin-bottom: 4px;">⏱️ Tối ưu hóa chu trình thời gian lao động:</p>
+          <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Tổng thời gian sản xuất một slide deck chuyên nghiệp giảm mạnh từ <strong>8-12 giờ</strong> xuống còn <strong>4-5 giờ</strong>. Giải phóng hoàn toàn năng lượng thô sang tập trung xử lý phân tích "tinh".</p>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🛡️ Tư duy Biện luận & Trách nhiệm Đạo đức số</h3>
+        <p>Phản tư nghiêm túc về các rủi ro cốt lõi khi ứng dụng AI tạo sinh vào môi trường nghiên cứu và giáo dục học thuật chuyên nghiệp.</p>
+
+        <div class="demo-box" style="background: #FFEBEE; border-left: 4px solid #D32F2F; text-align: left;">
+          <h4 style="color: #C62828; margin-bottom: 12px;">⚠️ 5 Tiêu chuẩn Đạo đức cần tuân thủ tối nghiêm:</h4>
+          <ol style="font-size: 13px; color: var(--brown-700); padding-left: 20px; line-height: 1.8;">
+            <li><strong>Tính trung thực học thuật (Academic Integrity):</strong> Sẵn sàng kiểm tra, điều chỉnh sâu mọi đầu ra thay vì bypass quá trình học tập thực tế.</li>
+            <li><strong>Quyền sở hữu trí tuệ:</strong> Nhận thức rõ ràng các vùng xám pháp lý về bản quyền đối với tác phẩm kiến tạo từ thuật toán.</li>
+            <li><strong>Nhận diện và sửa chữa định kiến (Bias):</strong> Chủ động phát hiện thiên kiến văn hóa Tây phương để "Việt Nam hóa" ngôn ngữ, hình ảnh phù hợp.</li>
+            <li><strong>Chống suy giảm năng lực:</strong> Không để sự phụ thuộc công cụ làm thui chột năng lực phản biện và viết văn bản cơ bản.</li>
+            <li><strong>Tính minh bạch & Trách nhiệm:</strong> Nghĩa vụ công khai rõ ràng nhật ký Prompts và mức độ can thiệp của AI trong sản phẩm cuối cùng.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>💡 Ghi chú Học tập & Bài học Cốt lõi</h3>
+        <p><strong>Bản chất công nghệ:</strong> AI không thay thế tư duy sáng tạo của con người mà đóng vai trò khuếch đại năng lực số.</p>
+        <p style="margin-top: 8px;"><strong>Năng lực thế kỷ 21:</strong> Chất lượng đầu ra phụ thuộc hoàn toàn vào kỹ năng Prompt Engineering và năng lực đánh giá phản biện.</p>
+        <p style="margin-top: 8px;"><strong>Kỹ năng tích hợp:</strong> Biết cách phối hợp đa công cụ AI bổ khuyết cho nhau là chìa khóa tối ưu hóa năng suất sáng tạo.</p>
+      </div>
+
+      <div class="detail-section" style="text-align: center; border: none; padding: 60px 0;">
+        <h3 style="border: none; padding: 0; margin-bottom: 24px;">File PDF</h3>
+        <a href="5.pdf" style="display: inline-block; background: #FF7A00; color: white; padding: 14px 48px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; transition: background 0.3s;">WATCH NOW</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ══════════════ BÀI 6 ══════════════ -->
+<div id="page-bai6" class="page">
+  <div class="detail-page">
+    <button class="back-btn" onclick="showPage('duan')">← Quay lại</button>
+    <div class="detail-hero">
+      <div class="detail-hero-text">
+        <div class="section-tag">Bài 6</div>
+        <h2 class="section-title">Sử Dụng AI Có Trách Nhiệm Trong Học Thuật</h2>
+        <p>Báo cáo thực hành rèn luyện kỹ năng xây dựng giới hạn đạo đức số, tuân thủ chính sách học thuật và thiết lập bộ nguyên tắc cá nhân khi ứng dụng Trí tuệ Nhân tạo vào nghiên cứu.</p>
+      </div>
+      <div class="detail-hero-img">
+        <span>Cập nhật ảnh chụp màn hình bài 6</span>
+      </div>
+    </div>
+
+    <div class="detail-body" style="max-width: 900px; margin: 0 auto; padding: 60px 40px;">
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>⚖️ Phân Tích Chính Sách Sử Dụng AI của Trường</h3>
+        <p>Tìm hiểu và đối chiếu xu hướng quy định học thuật liên quan đến Trí tuệ nhân tạo (cập nhật 09/2024).</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; text-align: left;">
+          <div class="demo-box" style="background: #E8F5E9; border-top: 4px solid #2E7D32;">
+            <h4 style="color: #1B5E20; margin-bottom: 8px;">🏛️ ĐHQGHN - Điểm chính của chính sách</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Sinh viên được phép sử dụng AI như <strong>công cụ hỗ trợ</strong>, không phải thay thế tư duy. Mọi sự can thiệp của AI trong bài nộp phải được ghi chú/khai báo rõ ràng. Nghiêm cấm dùng AI để tạo ra toàn bộ nội dung bài luận.</p>
+          </div>
+          <div class="demo-box" style="background: #F3E5F5; border-top: 4px solid #8E24AA;">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">🔄 Đối chiếu: Đại học Bách Khoa HN</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6;">Có quy định tương tự nhưng nghiêm ngặt hơn ở các môn kỹ thuật: yêu cầu sinh viên phải <strong>nộp kèm nhật ký sử dụng AI</strong>. Xu hướng chung tại VN là <em>"Cho phép có kiểm soát"</em> thay vì cấm hoàn toàn.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>📝 Nhật Ký Thực Hành & Tuyên Bố Trách Nhiệm</h3>
+        <p><strong>Nhiệm vụ ứng dụng:</strong> Viết bài luận "Tác động của mạng xã hội đến sức khỏe tâm thần sinh viên". Sử dụng Claude Sonnet làm trợ lý.</p>
+        
+        <div class="demo-box" style="background: #FAFAFA; border-left: 4px solid #1976D2; text-align: left; margin-bottom: 24px;">
+          <div style="margin-bottom: 16px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 1 (Giai đoạn ý tưởng):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Hãy liệt kê 5 góc độ học thuật để phân tích tác động của mạng xã hội đến sức khỏe tâm thần sinh viên."</code>
+            <p style="font-size: 13px; color: #1976D2; margin-top: 8px;"><strong>⚡ Đánh giá & Xử lý:</strong> AI đề xuất 5 góc độ (so sánh xã hội, FOMO, rối loạn giấc ngủ, nghiện thông tin, mạng lưới hỗ trợ). Phân tích đánh giá: Giữ lại 3 góc độ sắc sảo, loại bỏ 2 ý quá chung chung. Không bê nguyên xi gợi ý.</p>
+          </div>
+          
+          <div style="margin-bottom: 16px;">
+            <strong style="font-size: 13px; color: #E65100;">💬 Prompt 2 (Giai đoạn phản biện):</strong>
+            <code style="display: block; background: #FFF; padding: 10px; border-radius: 4px; font-size: 13px; margin-top: 4px; border: 1px solid #E0E0E0;">"Đọc đoạn luận văn này và đóng vai phản biện độc lập để góp ý về lập luận: [đoạn văn draft]"</code>
+            <p style="font-size: 13px; color: #1976D2; margin-top: 8px;"><strong>⚡ Đánh giá & Xử lý:</strong> AI chỉ ra luận điểm thiếu bằng chứng định lượng, đề xuất dùng số liệu từ WHO. Hành động: Trực tiếp tiến hành tra cứu nguồn gốc độc lập (fact-check), xác nhận tính đúng đắn trước khi tích hợp vào bài.</p>
+          </div>
+
+          <div style="background: #E1F5FE; padding: 12px; border-radius: 4px; margin-top: 12px;">
+            <p style="font-size: 13px; font-weight: 500; color: #0277BD; margin: 0;">📌 Tuyên bố minh bạch (Khai báo sử dụng AI):</p>
+            <p style="font-size: 13px; color: #01579B; margin-top: 4px; margin-bottom: 0;">Bài luận được soạn thảo hoàn toàn bởi tác giả. AI (Claude) được sử dụng ở bước Brainstorm dàn ý và phản biện lập luận. Mọi nội dung đưa vào bài đều đã được kiểm duyệt, xác minh và diễn đạt lại 100% bằng văn phong cá nhân.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🧭 Phân Tích Các Vấn Đề Đạo Đức Cốt Lõi</h3>
+        <p>Nhận diện rõ ràng ranh giới giữa việc ứng dụng công nghệ làm đòn bẩy và hành vi gian lận học thuật.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px; margin-bottom: 24px; text-align: left;">
+          <div class="demo-box" style="background: #E8F5E9; padding: 16px;">
+            <h4 style="color: #2E7D32; font-size: 14px; text-align: center; margin-bottom: 8px;">✅ Hỗ trợ hợp lý</h4>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5; text-align: center;">Dùng AI brainstorm ý tưởng, kiểm tra lỗi ngữ pháp, hoặc tra cứu tài liệu căn bản. Hoàn toàn không vi phạm.</p>
+          </div>
+          <div class="demo-box" style="background: #FFFDE7; padding: 16px;">
+            <h4 style="color: #F57F17; font-size: 14px; text-align: center; margin-bottom: 8px;">⚠️ Vùng xám</h4>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5; text-align: center;">Nhờ AI viết đoạn mẫu rồi chỉnh sửa lại. Mức độ phụ thuộc cao và cần căn cứ vào quy định cụ thể của từng giảng viên.</p>
+          </div>
+          <div class="demo-box" style="background: #FFEBEE; padding: 16px;">
+            <h4 style="color: #C62828; font-size: 14px; text-align: center; margin-bottom: 8px;">❌ Gian lận</h4>
+            <p style="font-size: 12px; color: var(--brown-700); line-height: 1.5; text-align: center;">Nộp nguyên văn đầu ra của AI tạo sinh mà không khai báo, hoặc bypass hoàn toàn quy trình suy nghĩ.</p>
+          </div>
+        </div>
+
+        <div class="demo-box" style="background: #FFF; border-left: 4px solid #607D8B; text-align: left;">
+          <p style="font-size: 13px; color: var(--brown-800); line-height: 1.6; margin-bottom: 8px;"><strong>🔍 Sở hữu trí tuệ:</strong> Văn bản do AI tạo ra hiện chưa có chủ thể bản quyền rõ ràng theo pháp luật. Trích dẫn AI với tư cách là một "công cụ phần mềm" là thực hành chuẩn xác nhất hiện nay.</p>
+          <p style="font-size: 13px; color: var(--brown-800); line-height: 1.6; margin: 0;"><strong>🧠 Tác động phát triển:</strong> Sự lạm dụng thụ động làm thui chột tư duy phản biện, kỹ năng tổng hợp và năng lực biểu đạt ngôn ngữ. Đây là rủi ro lớn nhất cho nghề nghiệp tương lai.</p>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🛡️ Bộ 6 Nguyên Tắc Cá Nhân (Golden Rules)</h3>
+        <p>Cẩm nang nguyên tắc được đúc kết để duy trì tính chính trực trong mọi nhiệm vụ học tập.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; text-align: left;">
+          <div class="demo-box" style="background: #FAFAFA; border: 1px solid #E0E0E0;">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">01. Tư duy trước, AI sau</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; margin: 0;">Luôn phác thảo ý tưởng cốt lõi của riêng mình trước khi hỏi AI để không bị định kiến (anchoring bias) bởi máy móc.</p>
+          </div>
+          <div class="demo-box" style="background: #FAFAFA; border: 1px solid #E0E0E0;">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">02. Xác minh mọi thông tin</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; margin: 0;">Không dùng số liệu/trích dẫn nếu chưa tra cứu nguồn gốc độc lập (Đề phòng AI hallucination bịa đặt thông tin).</p>
+          </div>
+          <div class="demo-box" style="background: #FAFAFA; border: 1px solid #E0E0E0;">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">03. Khai báo minh bạch</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; margin: 0;">Ghi chú rõ trong mọi bài luận: AI đã được sử dụng ở bước nào, với mục đích gì và công cụ cụ thể nào.</p>
+          </div>
+          <div class="demo-box" style="background: #FAFAFA; border: 1px solid #E0E0E0;">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">04. Giữ văn phong cá nhân</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; margin: 0;">Viết và diễn đạt lại bằng ngôn ngữ riêng. Không copy nguyên văn dù cấu trúc của AI có vẻ bóng bẩy, hoàn chỉnh.</p>
+          </div>
+          <div class="demo-box" style="background: #FAFAFA; border: 1px solid #E0E0E0;">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">05. AI không thay thế việc học</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; margin: 0;">Sử dụng thuật toán để hiểu khái niệm sâu sắc hơn, không phải phao cứu sinh để bỏ qua quá trình đọc tài liệu gốc.</p>
+          </div>
+          <div class="demo-box" style="background: #FAFAFA; border: 1px solid #E0E0E0;">
+            <h4 style="color: #4A148C; margin-bottom: 8px;">06. Tôn trọng môn học</h4>
+            <p style="font-size: 13px; color: var(--brown-700); line-height: 1.6; margin: 0;">Tuân thủ tuyệt đối syllabus và hướng dẫn của từng giảng viên do mỗi môn có mức độ chấp nhận AI khác nhau.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" style="text-align: center;">
+        <h3>🔄 Quy trình Thực thi Chuẩn (SOP)</h3>
+        <p>Sơ đồ 5 bước làm việc có trách nhiệm cùng Trí tuệ Nhân tạo.</p>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; margin-bottom: 24px;">
+          <span style="background: #E8EAF6; color: #3F51B5; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;">1. Tự phác thảo</span>
+          <span style="color: #9E9E9E; align-self: center;">➔</span>
+          <span style="background: #E8EAF6; color: #3F51B5; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;">2. Hỏi AI có chủ đích</span>
+          <span style="color: #9E9E9E; align-self: center;">➔</span>
+          <span style="background: #E8EAF6; color: #3F51B5; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;">3. Xác minh độc lập</span>
+          <span style="color: #9E9E9E; align-self: center;">➔</span>
+          <span style="background: #E8EAF6; color: #3F51B5; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;">4. Cấu trúc cá nhân</span>
+          <span style="color: #9E9E9E; align-self: center;">➔</span>
+          <span style="background: #E8F5E9; color: #2E7D32; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;">5. Khai báo minh bạch</span>
+        </div>
+        
+        
+      </div>
+
+      <div class="detail-section" style="text-align: center; border: none; padding: 60px 0;">
+        <h3 style="border: none; padding: 0; margin-bottom: 24px;">File PDF</h3>
+        <a href="6.pdf" style="display: inline-block; background: #FF7A00; color: white; padding: 14px 48px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; transition: background 0.3s;">WATCH NOW</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ══════════════ TRANG TỔNG KẾT ══════════════ -->
+<div id="page-tongket" class="page">
+  <div class="tongket-hero">
+    <div class="section-tag">Tổng kết</div>
+    <h2 class="section-title">Nhìn lại hành trình &<br>Định hình tương lai</h2>
+    <p>Nhìn lại chặng đường xây dựng Portfolio này, em nhận ra đây không chỉ là việc hoàn thành một môn học, mà là quá trình "nâng cấp" hệ điều hành tư duy của bản thân. Từ những bỡ ngỡ ban đầu, em đã học cách làm chủ công nghệ thay vì bị nó chi phối, biến các công cụ số thành đòn bẩy vững chắc cho con đường trở thành một Data Engineer trong tương lai.</p>
+  </div>
+
+  <div class="tru-cot">
+    <div class="tru-cot-item">
+      <div class="tc-num">01</div>
+      <h3>Kiến thức (Knowledge)</h3>
+      <p>Nắm vững bức tranh toàn cảnh về hệ sinh thái AI tạo sinh. Hiểu rõ bản chất của liêm chính học thuật trong thời đại số và nguyên lý vận hành của các mô hình ngôn ngữ lớn (LLM), từ đó áp dụng hiệu quả vào quá trình nghiên cứu tài liệu và xử lý thông tin phức tạp.</p>
+    </div>
+    <div class="tru-cot-item">
+      <div class="tc-num">02</div>
+      <h3>Kỹ năng (Skills)</h3>
+      <p>Làm chủ kỹ thuật Prompt Engineering nâng cao (chuyển đổi từ câu lệnh cơ bản sang cấu trúc: Vai trò + Ngữ cảnh + Ví dụ + Yêu cầu định dạng). Phát triển kỹ năng tư duy phản biện để đánh giá, tinh chỉnh đầu ra của AI và năng lực tổ chức luồng công việc số (Digital Workflow) chuyên nghiệp.</p>
+    </div>
+    <div class="tru-cot-item">
+      <div class="tc-num">03</div>
+      <h3>Tư duy (Mindset)</h3>
+      <p>Chuyển dịch hoàn toàn sang tư duy "Human-in-the-loop": Luôn giữ vững vai trò kiểm soát lõi. AI chỉ là người trợ lý tăng cường tốc độ xử lý, còn khả năng phác thảo ý tưởng, kiểm chứng sự thật và tư duy logic mới là giá trị cốt lõi không thể thay thế của người kỹ sư.</p>
+    </div>
+  </div>
+
+  <div class="tam-dac-section">
+    <div class="tam-dac-card highlight">
+      <h3>Sản phẩm tâm đắc nhất</h3>
+      <p>Em tự hào nhất về dự án <strong>Nghiên cứu Kỹ năng Viết Prompt Hiệu quả</strong> (Bài 3) và <strong>Bộ nguyên tắc cá nhân sử dụng AI</strong> (Bài 6). Quá trình thử nghiệm 9 phiên bản prompt khác nhau đã giúp em nhận ra: "Chất lượng đầu ra của AI phản chiếu chính xác chất lượng tư duy đầu vào của người dùng". Nó chứng minh rằng AI không làm ta lười đi, mà buộc ta phải tư duy mạch lạc và có cấu trúc hơn bao giờ hết.</p>
+    </div>
+    <div class="tam-dac-card">
+      <h3>Thách thức & Cách vượt qua</h3>
+      <p>Thách thức lớn nhất là vượt qua <strong>"ảo giác AI" (AI Hallucination)</strong> và sự cám dỗ của việc sao chép thụ động. Ban đầu, em mất rất nhiều thời gian để kiểm chứng các trích dẫn học thuật do AI sinh ra. Cách em vượt qua là thiết lập kỷ luật thép: <em>"Tôi tư duy trước, AI hỗ trợ sau"</em>. Luôn tự phác thảo luồng ý tưởng và đối chiếu chéo thông tin từ các nguồn độc lập trước khi tích hợp vào sản phẩm cuối cùng.</p>
+    </div>
+  </div>
+
+  <div class="kehoach-section">
+    <h2>Kế hoạch hành động trong Kỷ nguyên số</h2>
+    <div class="kehoach-list">
+      <div class="kehoach-item">
+        <h4>Ứng dụng trong học tập</h4>
+        <p>Áp dụng triệt để "Bộ nguyên tắc sử dụng AI có trách nhiệm" vào các môn chuyên ngành Khoa học Máy tính tại UET. Sử dụng AI như một gia sư lập trình để giải thích các thuật toán phức tạp (Data Structures, Algorithms) thay vì để nó code hộ toàn bộ, đảm bảo hiểu sâu bản chất vấn đề.</p>
+      </div>
+      <div class="kehoach-item">
+        <h4>Phát triển nghiên cứu</h4>
+        <p>Tận dụng kỹ năng Prompt Engineering học thuật để tối ưu hóa việc tóm tắt và đọc hiểu các bài báo nghiên cứu chuyên sâu (Research Papers). Thiết lập quy trình đánh giá nguồn tài liệu nghiêm ngặt để xây dựng kho dữ liệu kiến thức (Knowledge Base) cá nhân chuẩn xác và chất lượng.</p>
+      </div>
+      <div class="kehoach-item">
+        <h4>Phát triển nghề nghiệp</h4>
+        <p>Sẽ tiếp tục duy trì và nâng cấp Portfolio này thành một "Live Document" (Tài liệu sống). Tích hợp thêm các dự án cá nhân về Python, SQL và Data Pipeline để biến đây thành hồ sơ năng lực trực quan, chuyên nghiệp, tạo lợi thế cạnh tranh thực tế khi ứng tuyển các vị trí Data Engineering.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-section">
+    <blockquote>"AI không thay thế tư duy sáng tạo — nó tăng cường và giải phóng sức sáng tạo của con người khi được sử dụng bằng một cái đầu lạnh và một ý thức trách nhiệm cao. Hành trình số của tôi thực sự chỉ mới bắt đầu."</blockquote>
+    <cite>— Quách Trung Hà</cite>
+  </div>
+
+
+  <footer>
+    <div class="footer-info">Quách Trung Hà · 25024100 </div>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/hqachhh" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/qachunha/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<script>
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + pageId);
+  if (target) {
+    target.classList.add('active');
+  } else {
+    console.error('Page not found: page-' + pageId);
+    document.getElementById('page-intro').classList.add('active');
+    return;
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navMap = { intro: 'nav-intro', duan: 'nav-duan', tongket: 'nav-tongket' };
+  if (navMap[pageId]) {
+    const navEl = document.getElementById(navMap[pageId]);
+    if (navEl) navEl.classList.add('active');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+showPage('intro');
+</script>
+</body>
